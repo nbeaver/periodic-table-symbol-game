@@ -2,9 +2,7 @@ function handleFormKeyPress(event) {
   if (event.key === "Enter") {
     //window.alert("Enter key was pressed");
     var senderID = event.target.attributes.id
-    console.log(senderID)
     var newTargetIndex = jumpList[senderID.value]
-    console.log(newTargetIndex)
     var newTargetID = getIDFromIndex(newTargetIndex)
     document.getElementById(newTargetID).focus();
     document.getElementById(newTargetID).select();
@@ -108,34 +106,34 @@ var IDtoAtomicNumber = {
   "i124" : 116,
   "i124" : 117,
   "i126" : 118,
-  "i122" : 57,
-  "i123" : 58,
-  "i124" : 59,
-  "i125" : 60,
-  "i126" : 61,
-  "i127" : 62,
-  "i128" : 63,
-  "i129" : 64,
-  "i130" : 65,
-  "i131" : 66,
-  "i132" : 67,
-  "i133" : 68,
-  "i134" : 69,
-  "i135" : 70,
-  "i136" : 89,
-  "i137" : 90,
-  "i138" : 91,
-  "i139" : 92,
-  "i140" : 93,
-  "i141" : 94,
-  "i142" : 95,
-  "i143" : 96,
-  "i144" : 97,
-  "i145" : 98,
-  "i146" : 99,
-  "i147" : 100,
-  "i148" : 101,
-  "i149" : 102
+  "i127" : 57,
+  "i128" : 58,
+  "i129" : 59,
+  "i130" : 60,
+  "i131" : 61,
+  "i132" : 62,
+  "i133" : 63,
+  "i134" : 64,
+  "i135" : 65,
+  "i136" : 66,
+  "i137" : 67,
+  "i138" : 68,
+  "i139" : 69,
+  "i140" : 70,
+  "i141" : 89,
+  "i142" : 90,
+  "i143" : 91,
+  "i144" : 92,
+  "i145" : 93,
+  "i146" : 94,
+  "i147" : 95,
+  "i148" : 96,
+  "i149" : 97,
+  "i150" : 98,
+  "i151" : 99,
+  "i152" : 100,
+  "i153" : 101,
+  "i154" : 102
 }
 
 var AtomicNumberToSymbol = {
@@ -293,7 +291,6 @@ function initializeJumpList () {
 
 function registerEventHandlers() {
   for (var i = 1; i <= 154; i++) {
-    console.log(i);
     var elementID = getIDFromIndex(i)
     var element = document.getElementById(elementID);
     if (element == null) {
