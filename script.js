@@ -1,12 +1,25 @@
 function handleFormKeyPress(event) {
   if (event.key === "Enter") {
-    //window.alert("Enter key was pressed");
-    var senderID = event.target.attributes.id
+    var senderID = event.target.attributes.id;
     var newTargetIndex = jumpList[senderID.value]
     var newTargetID = getIDFromIndex(newTargetIndex)
     document.getElementById(newTargetID).focus();
     document.getElementById(newTargetID).select();
   }
+}
+
+function handleFormKeyUp(event) {
+  var senderID = event.target.attributes.id;
+  var senderValue = event.target.value;
+  var atomicNumber = IDtoAtomicNumber[senderID.value];
+  var atomicSymbol = AtomicNumberToSymbol[atomicNumber];
+  if (senderValue == atomicSymbol) {
+    event.target.style.color = "green";
+  } else {
+    event.target.style.color = "red";
+  }
+  console.log(atomicSymbol);
+  console.log(senderValue);
 }
 
 function getIDFromIndex(index) {
@@ -290,13 +303,15 @@ function initializeJumpList () {
 }
 
 function registerEventHandlers() {
-  for (var i = 1; i <= 154; i++) {
+  var nCells = 18*7 + 2*14;
+  for (var i = 1; i <= nCells; i++) {
     var elementID = getIDFromIndex(i)
     var element = document.getElementById(elementID);
     if (element == null) {
       console.log("Could not get ID: "+elementID)
     } else {
       element.onkeypress = handleFormKeyPress;
+      element.onkeyup = handleFormKeyUp;
     }
   }
 }
