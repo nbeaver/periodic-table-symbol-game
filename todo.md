@@ -5,3 +5,7 @@
 - [x] Move cursor to the top cell of the next column when pressing enter on the bottom row.
 
 - [ ] Move cursor backward after pressing Shift-Enter
+
+- [ ] Add counter to see how many out of 118 are correcter.
+
+- [ ] Find out why sometimes the highlighting doesn't work right.
