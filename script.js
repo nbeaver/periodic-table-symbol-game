@@ -23,7 +23,7 @@ function handleFormKeyUp(event) {
 }
 
 function getIDFromIndex(index) {
-  return "i" + index.toString()
+  return "i" + index.toString();
 }
 
 var jumpList = new Object();
@@ -148,7 +148,7 @@ var IDtoAtomicNumber = {
   "i152" : 101,
   "i153" : 102,
   "i154" : 103
-}
+};
 
 var AtomicNumberToSymbol = {
   1 : "H",
@@ -269,7 +269,7 @@ var AtomicNumberToSymbol = {
   116 : "Lv",
   117 : "Ts",
   118 : "Og",
-}
+};
 
 function initializeJumpList () {
   var nRows = 7;
@@ -318,10 +318,10 @@ function initializeJumpList () {
 function registerEventHandlers() {
   var nCells = 18*7 + 2*14;
   for (var i = 1; i <= nCells; i++) {
-    var elementID = getIDFromIndex(i)
+    var elementID = getIDFromIndex(i);
     var element = document.getElementById(elementID);
     if (element == null) {
-      console.log("Error: Could not get ID: "+elementID)
+      console.log("Error: Could not get ID: "+elementID);
     } else {
       element.onkeypress = handleFormKeyPress;
       element.onkeyup = handleFormKeyUp;
