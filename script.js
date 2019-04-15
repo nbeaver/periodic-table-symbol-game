@@ -9,10 +9,11 @@ function handleFormKeyPress(event) {
 }
 
 function handleFormKeyUp(event) {
-  var senderID = event.target.attributes.id;
-  var senderValue = event.target.value;
-  var atomicNumber = IDtoAtomicNumber[senderID.value];
-  var atomicSymbol = AtomicNumberToSymbol[atomicNumber];
+  // var senderID = event.target.attributes.id;
+  // var senderValue = event.target.value;
+  // var atomicNumber = IDtoAtomicNumber[senderID.value];
+  // var atomicSymbol = AtomicNumberToSymbol[atomicNumber];
+  // TODO: should checkAnswers be passed the edited cell?
   checkAnswers();
 }
 
