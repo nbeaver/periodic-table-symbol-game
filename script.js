@@ -21,6 +21,7 @@ function getIDFromIndex(index) {
 }
 
 var jumpList = new Object();
+var reverseJumpList = new Object();
 
 var IDtoAtomicNumber = {
   "i1"   : 1,
@@ -270,17 +271,22 @@ function initializeJumpList () {
   var nNormalCells = nCols*(nRows - 1);
   for (var i = 1; i <= nNormalCells; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = getIDFromIndex(i + nCols);
+    var targetID = getIDFromIndex(i + nCols);
+    jumpList[myID] = targetID;
+    reverseJumpList[targetID] = myID;
   }
   var nLastBottomCell = nNormalCells + nCols;
   for (var i = nNormalCells+1; i < nLastBottomCell; i++) {
     var myID = getIDFromIndex(i);
+    var targetID = getIDFromIndex(i - nNormalCells + 1);
     // To jump to the top of next column, subtract out 108.
-    jumpList[myID] = getIDFromIndex(i - nNormalCells + 1);
+    jumpList[myID] = targetID;
+    reverseJumpList[targetID] = myID;
   }
   // Map the last cell to itself.
   var IDLastBottomCell = getIDFromIndex(nLastBottomCell);
   jumpList[IDLastBottomCell] = IDLastBottomCell;
+  reverseJumpList[IDLastBottomCell] = IDLastBottomCell;
 
   var nRowSecondary = 2;
   var nColSecondary = 14;
@@ -288,14 +294,19 @@ function initializeJumpList () {
   var nLastActinide = nLastBottomCell + nRowSecondary*nColSecondary;
   for (var i = nLastBottomCell+1; i <= nLastLanthanide; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = getIDFromIndex(i + nColSecondary);
+    var targetID = getIDFromIndex(i + nColSecondary);
+    jumpList[myID] = targetID;
+    reverseJumpList[targetID] = myID;
   }
   for (var i = nLastLanthanide+1; i < nLastActinide; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = getIDFromIndex(i - nColSecondary + 1);
+    var targetID = getIDFromIndex(i - nColSecondary + 1);
+    jumpList[myID] = targetID;
+    reverseJumpList[targetID] = myID;
   }
   // Jump from last actinide to top of series 3
   jumpList[getIDFromIndex(nLastActinide)] = getIDFromIndex(3);
+  reverseJumpList[getIDFromIndex(3)] = getIDFromIndex(nLastActinide);
 }
 
 function registerEventHandlers() {
