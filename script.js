@@ -30,69 +30,69 @@ var jumpList = new Object();
 var reverseJumpList = new Object();
 
 var IDtoAtomicNumber = {
-  "i1"   : 1,
-  "i18"  : 2,
-  "i19"  : 3,
-  "i20"  : 4,
-  "i31"  : 5,
-  "i32"  : 6,
-  "i33"  : 7,
-  "i34"  : 8,
-  "i35"  : 9,
-  "i36"  : 10,
-  "i37"  : 11,
-  "i38"  : 12,
-  "i49"  : 13,
-  "i50"  : 14,
-  "i51"  : 15,
-  "i52"  : 16,
-  "i53"  : 17,
-  "i54"  : 18,
-  "i55"  : 19,
-  "i56"  : 20,
-  "i57"  : 21,
-  "i58"  : 22,
-  "i59"  : 23,
-  "i60"  : 24,
-  "i61"  : 25,
-  "i62"  : 26,
-  "i63"  : 27,
-  "i64"  : 28,
-  "i65"  : 29,
-  "i66"  : 30,
-  "i67"  : 31,
-  "i68"  : 32,
-  "i69"  : 33,
-  "i70"  : 34,
-  "i71"  : 35,
-  "i72"  : 36,
-  "i73"  : 37,
-  "i74"  : 38,
-  "i75"  : 39,
-  "i76"  : 40,
-  "i77"  : 41,
-  "i78"  : 42,
-  "i79"  : 43,
-  "i80"  : 44,
-  "i81"  : 45,
-  "i82"  : 46,
-  "i83"  : 47,
-  "i84"  : 48,
-  "i85"  : 49,
-  "i86"  : 50,
-  "i87"  : 51,
-  "i88"  : 52,
-  "i89"  : 53,
-  "i90"  : 54,
-  "i91"  : 55,
-  "i92"  : 56,
-  "i93"  : 57,
-  "i94"  : 72,
-  "i95"  : 73,
-  "i96"  : 74,
-  "i97"  : 75,
-  "i98"  : 76,
-  "i99"  : 77,
+  "i1" : 1,
+  "i18" : 2,
+  "i19" : 3,
+  "i20" : 4,
+  "i31" : 5,
+  "i32" : 6,
+  "i33" : 7,
+  "i34" : 8,
+  "i35" : 9,
+  "i36" : 10,
+  "i37" : 11,
+  "i38" : 12,
+  "i49" : 13,
+  "i50" : 14,
+  "i51" : 15,
+  "i52" : 16,
+  "i53" : 17,
+  "i54" : 18,
+  "i55" : 19,
+  "i56" : 20,
+  "i57" : 21,
+  "i58" : 22,
+  "i59" : 23,
+  "i60" : 24,
+  "i61" : 25,
+  "i62" : 26,
+  "i63" : 27,
+  "i64" : 28,
+  "i65" : 29,
+  "i66" : 30,
+  "i67" : 31,
+  "i68" : 32,
+  "i69" : 33,
+  "i70" : 34,
+  "i71" : 35,
+  "i72" : 36,
+  "i73" : 37,
+  "i74" : 38,
+  "i75" : 39,
+  "i76" : 40,
+  "i77" : 41,
+  "i78" : 42,
+  "i79" : 43,
+  "i80" : 44,
+  "i81" : 45,
+  "i82" : 46,
+  "i83" : 47,
+  "i84" : 48,
+  "i85" : 49,
+  "i86" : 50,
+  "i87" : 51,
+  "i88" : 52,
+  "i89" : 53,
+  "i90" : 54,
+  "i91" : 55,
+  "i92" : 56,
+  "i93" : 57,
+  "i94" : 72,
+  "i95" : 73,
+  "i96" : 74,
+  "i97" : 75,
+  "i98" : 76,
+  "i99" : 77,
   "i100" : 78,
   "i101" : 79,
   "i102" : 80,
@@ -271,10 +271,10 @@ var AtomicNumberToSymbol = {
   118 : "Og",
 };
 
-function initializeJumpList () {
+function initializeJumpList() {
   var nRows = 7;
   var nCols = 18;
-  var nNormalCells = nCols*(nRows - 1);
+  var nNormalCells = nCols * (nRows - 1);
   for (var i = 1; i <= nNormalCells; i++) {
     var myID = getIDFromIndex(i);
     var targetID = getIDFromIndex(i + nCols);
@@ -282,7 +282,7 @@ function initializeJumpList () {
     reverseJumpList[targetID] = myID;
   }
   var nLastBottomCell = nNormalCells + nCols;
-  for (var i = nNormalCells+1; i < nLastBottomCell; i++) {
+  for (var i = nNormalCells + 1; i < nLastBottomCell; i++) {
     var myID = getIDFromIndex(i);
     var targetID = getIDFromIndex(i - nNormalCells + 1);
     // To jump to the top of next column, subtract out 108.
@@ -297,14 +297,14 @@ function initializeJumpList () {
   var nRowSecondary = 2;
   var nColSecondary = 14;
   var nLastLanthanide = nLastBottomCell + nColSecondary;
-  var nLastActinide = nLastBottomCell + nRowSecondary*nColSecondary;
-  for (var i = nLastBottomCell+1; i <= nLastLanthanide; i++) {
+  var nLastActinide = nLastBottomCell + nRowSecondary * nColSecondary;
+  for (var i = nLastBottomCell + 1; i <= nLastLanthanide; i++) {
     var myID = getIDFromIndex(i);
     var targetID = getIDFromIndex(i + nColSecondary);
     jumpList[myID] = targetID;
     reverseJumpList[targetID] = myID;
   }
-  for (var i = nLastLanthanide+1; i < nLastActinide; i++) {
+  for (var i = nLastLanthanide + 1; i < nLastActinide; i++) {
     var myID = getIDFromIndex(i);
     var targetID = getIDFromIndex(i - nColSecondary + 1);
     jumpList[myID] = targetID;
@@ -316,12 +316,12 @@ function initializeJumpList () {
 }
 
 function registerEventHandlers() {
-  var nCells = 18*7 + 2*14;
+  var nCells = 18 * 7 + 2 * 14;
   for (var i = 1; i <= nCells; i++) {
     var elementID = getIDFromIndex(i);
     var element = document.getElementById(elementID);
     if (element == null) {
-      console.log("Error: Could not get ID: "+elementID);
+      console.log("Error: Could not get ID: " + elementID);
     } else {
       element.onkeypress = handleFormKeyPress;
       element.onkeyup = handleFormKeyUp;
@@ -330,7 +330,7 @@ function registerEventHandlers() {
 }
 
 function checkAnswers() {
-  var nCells = 18*7 + 2*14;
+  var nCells = 18 * 7 + 2 * 14;
   var nCorrect = 0;
   var nIncorrect = 0;
   var nMissing = 0;
