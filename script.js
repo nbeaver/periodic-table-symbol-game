@@ -324,7 +324,7 @@ function checkAnswers() {
       if (guess === answer) {
         nCorrect++;
         cell.style.color = "green";
-      } else if (guess != '') {
+      } else {
         // incorrect guess
         nIncorrect++;
         cell.style.color = "red";
@@ -333,6 +333,9 @@ function checkAnswers() {
       if (guess != '') {
         // non-blank guess in a cell that should be blank
         nIncorrect++;
+        cell.style.color = "red";
+      } else {
+        cell.style.color = "black";
       }
     }
   }
