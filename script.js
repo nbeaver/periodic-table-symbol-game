@@ -1,5 +1,11 @@
 function handleFormKeyPress(event) {
-  if (event.key === "Enter") {
+  // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+  if (event.key === "Enter" && event.shiftKey) {
+    var senderID = event.target.attributes.id;
+    var newTargetID = reverseJumpList[senderID.value];
+    document.getElementById(newTargetID).focus();
+    document.getElementById(newTargetID).select();
+  } else if (event.key === "Enter") {
     var senderID = event.target.attributes.id;
     var newTargetID = jumpList[senderID.value];
     document.getElementById(newTargetID).focus();
