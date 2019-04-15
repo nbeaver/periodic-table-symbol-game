@@ -327,6 +327,7 @@ function checkAnswers() {
   var nCells = 18*7 + 2*14;
   var nCorrect = 0;
   var nIncorrect = 0;
+  var nMissing = 0;
   for (var i = 1; i <= nCells; i++) {
     var cellID = getIDFromIndex(i);
     var cell = document.getElementById(cellID);
@@ -334,7 +335,10 @@ function checkAnswers() {
     if (IDtoAtomicNumber.hasOwnProperty(cellID)) {
       var atomicNumber = IDtoAtomicNumber[cellID];
       var answer = AtomicNumberToSymbol[atomicNumber];
-      if (guess === answer) {
+      if (guess === '') {
+        cell.style.color = "black";
+        nMissing++;
+      } else if (guess === answer) {
         nCorrect++;
         cell.style.color = "green";
       } else {
@@ -343,6 +347,7 @@ function checkAnswers() {
         cell.style.color = "red";
       }
     } else {
+      // cells that should be blank
       if (guess != '') {
         // non-blank guess in a cell that should be blank
         nIncorrect++;
