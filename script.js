@@ -13,13 +13,7 @@ function handleFormKeyUp(event) {
   var senderValue = event.target.value;
   var atomicNumber = IDtoAtomicNumber[senderID.value];
   var atomicSymbol = AtomicNumberToSymbol[atomicNumber];
-  if (senderValue == atomicSymbol) {
-    event.target.style.color = "green";
-  } else {
-    event.target.style.color = "red";
-  }
-  console.log(atomicSymbol);
-  console.log(senderValue);
+  checkAnswers();
 }
 
 function getIDFromIndex(index) {
@@ -308,7 +302,7 @@ function registerEventHandlers() {
     var elementID = getIDFromIndex(i)
     var element = document.getElementById(elementID);
     if (element == null) {
-      console.log("Could not get ID: "+elementID)
+      console.log("Error: Could not get ID: "+elementID)
     } else {
       element.onkeypress = handleFormKeyPress;
       element.onkeyup = handleFormKeyUp;
@@ -316,9 +310,42 @@ function registerEventHandlers() {
   }
 }
 
+function checkAnswers() {
+  var nCells = 18*7 + 2*14;
+  var nCorrect = 0;
+  var nIncorrect = 0;
+  for (var i = 1; i <= nCells; i++) {
+    var cellID = getIDFromIndex(i);
+    var cell = document.getElementById(cellID);
+    var guess = cell.value;
+    if (IDtoAtomicNumber.hasOwnProperty(cellID)) {
+      var atomicNumber = IDtoAtomicNumber[cellID];
+      var answer = AtomicNumberToSymbol[atomicNumber];
+      if (guess === answer) {
+        nCorrect++;
+        cell.style.color = "green";
+      } else if (guess != '') {
+        // incorrect guess
+        nIncorrect++;
+        cell.style.color = "red";
+      }
+    } else {
+      if (guess != '') {
+        // non-blank guess in a cell that should be blank
+        nIncorrect++;
+      }
+    }
+  }
+  var elemCorrect = document.getElementById("count_correct");
+  var elemIncorrect = document.getElementById("count_incorrect");
+  elemCorrect.value = nCorrect;
+  elemIncorrect.value = nIncorrect;
+}
+
 function initialize() {
   initializeJumpList();
   registerEventHandlers();
+  checkAnswers();
 }
 
 window.onload = initialize;
