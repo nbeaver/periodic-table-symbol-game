@@ -1,8 +1,7 @@
 function handleFormKeyPress(event) {
   if (event.key === "Enter") {
     var senderID = event.target.attributes.id;
-    var newTargetIndex = jumpList[senderID.value]
-    var newTargetID = getIDFromIndex(newTargetIndex)
+    var newTargetID = jumpList[senderID.value];
     document.getElementById(newTargetID).focus();
     document.getElementById(newTargetID).select();
   }
@@ -271,16 +270,17 @@ function initializeJumpList () {
   var nNormalCells = nCols*(nRows - 1);
   for (var i = 1; i <= nNormalCells; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = i + nCols;
+    jumpList[myID] = getIDFromIndex(i + nCols);
   }
   var nLastBottomCell = nNormalCells + nCols;
   for (var i = nNormalCells+1; i < nLastBottomCell; i++) {
     var myID = getIDFromIndex(i);
     // To jump to the top of next column, subtract out 108.
-    jumpList[myID] = i - nNormalCells + 1;
+    jumpList[myID] = getIDFromIndex(i - nNormalCells + 1);
   }
   // Map the last cell to itself.
-  jumpList[getIDFromIndex(nLastBottomCell)] = nLastBottomCell;
+  var IDLastBottomCell = getIDFromIndex(nLastBottomCell);
+  jumpList[IDLastBottomCell] = IDLastBottomCell;
 
   var nRowSecondary = 2;
   var nColSecondary = 14;
@@ -288,13 +288,14 @@ function initializeJumpList () {
   var nLastActinide = nLastBottomCell + nRowSecondary*nColSecondary;
   for (var i = nLastBottomCell+1; i <= nLastLanthanide; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = i + nColSecondary;
+    jumpList[myID] = getIDFromIndex(i + nColSecondary);
   }
   for (var i = nLastLanthanide+1; i < nLastActinide; i++) {
     var myID = getIDFromIndex(i);
-    jumpList[myID] = i - nColSecondary + 1;
+    jumpList[myID] = getIDFromIndex(i - nColSecondary + 1);
   }
-  jumpList[getIDFromIndex(nLastActinide)] = 3;
+  // Jump from last actinide to top of series 3
+  jumpList[getIDFromIndex(nLastActinide)] = getIDFromIndex(3);
 }
 
 function registerEventHandlers() {
