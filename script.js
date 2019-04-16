@@ -1,16 +1,23 @@
 function handleFormKeyDown(event) {
   // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+  var senderID = event.target.attributes.id;
   if (event.key === "Enter" && event.shiftKey) {
-    var senderID = event.target.attributes.id;
-    var newTargetID = reverseJumpList[senderID.value];
-    document.getElementById(newTargetID).focus();
-    document.getElementById(newTargetID).select();
+    cursorUp(senderID);
   } else if (event.key === "Enter") {
-    var senderID = event.target.attributes.id;
-    var newTargetID = jumpList[senderID.value];
+    cursorDown(senderID);
+  }
+}
+
+function cursorUp(elemID) {
+    var newTargetID = reverseJumpList[elemID.value];
     document.getElementById(newTargetID).focus();
     document.getElementById(newTargetID).select();
-  }
+}
+
+function cursorDown(elemID) {
+    var newTargetID = jumpList[elemID.value];
+    document.getElementById(newTargetID).focus();
+    document.getElementById(newTargetID).select();
 }
 
 function handleFormKeyUp(event) {
