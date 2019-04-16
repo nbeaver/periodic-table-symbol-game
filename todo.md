@@ -12,4 +12,4 @@
 
 - [ ] Add a timer that stops when all cells are filled in correctly and no incorrect cells
 
-- [ ] Move cursor with up/down keys.
+- [x] Move cursor with up/down keys.
