@@ -5,6 +5,10 @@ function handleFormKeyDown(event) {
     cursorUp(senderID);
   } else if (event.key === "Enter") {
     cursorDown(senderID);
+  } else if (event.key === "ArrowDown") {
+    cursorDown(senderID);
+  } else if (event.key === "ArrowUp") {
+    cursorUp(senderID);
   }
 }
 
