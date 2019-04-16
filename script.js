@@ -1,4 +1,4 @@
-function handleFormKeyPress(event) {
+function handleFormKeyDown(event) {
   // https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
   if (event.key === "Enter" && event.shiftKey) {
     var senderID = event.target.attributes.id;
@@ -323,7 +323,7 @@ function registerEventHandlers() {
     if (element == null) {
       console.log("Error: Could not get ID: " + elementID);
     } else {
-      element.onkeypress = handleFormKeyPress;
+      element.onkeydown = handleFormKeyDown;
       element.onkeyup = handleFormKeyUp;
     }
   }
