@@ -340,6 +340,72 @@ function registerEventHandlers() {
   }
 }
 
+function getNCorrect() {
+  var nCells = 18 * 7 + 2 * 14;
+  var nCorrect = 0;
+  for (var i = 1; i <= nCells; i++) {
+    var cellID = getIDFromIndex(i);
+    var cell = document.getElementById(cellID);
+    var guess = cell.value;
+    if (IDtoAtomicNumber.hasOwnProperty(cellID)) {
+      var atomicNumber = IDtoAtomicNumber[cellID];
+      var answer = AtomicNumberToSymbol[atomicNumber];
+      if (guess === answer) {
+        nCorrect++;
+      }
+    }
+  }
+  return nCorrect;
+}
+function getNIncorrect() {
+  var nCells = 18 * 7 + 2 * 14;
+  var nIncorrect = 0;
+  for (var i = 1; i <= nCells; i++) {
+    var cellID = getIDFromIndex(i);
+    var cell = document.getElementById(cellID);
+    var guess = cell.value;
+    if (IDtoAtomicNumber.hasOwnProperty(cellID)) {
+      var atomicNumber = IDtoAtomicNumber[cellID];
+      var answer = AtomicNumberToSymbol[atomicNumber];
+      if (guess === '') {
+        continue;
+      } else if (guess === answer) {
+        continue;
+      } else {
+        // incorrect guess
+        nIncorrect++;
+      }
+    } else {
+      // cells that should be blank
+      if (guess != '') {
+        // non-blank guess in a cell that should be blank
+        nIncorrect++;
+      } else {
+        continue;
+      }
+    }
+  }
+  return nIncorrect;
+}
+
+function getNMissing() {
+  var nCells = 18 * 7 + 2 * 14;
+  var nMissing = 0;
+  for (var i = 1; i <= nCells; i++) {
+    var cellID = getIDFromIndex(i);
+    var cell = document.getElementById(cellID);
+    var guess = cell.value;
+    if (IDtoAtomicNumber.hasOwnProperty(cellID)) {
+      var atomicNumber = IDtoAtomicNumber[cellID];
+      var answer = AtomicNumberToSymbol[atomicNumber];
+      if (guess === '') {
+        nMissing++;
+      }
+    }
+  }
+  return nMissing;
+}
+
 function checkAnswers() {
   var nCells = 18 * 7 + 2 * 14;
   var nCorrect = 0;
@@ -380,10 +446,35 @@ function checkAnswers() {
   elemIncorrect.value = nIncorrect;
 }
 
+function updateTime() {
+  if (getNMissing() == 0 && getNCorrect() == 118 && getNIncorrect() == 0) {
+    // Leave the time as is when the chart is fully correct.
+    return;
+  }
+
+  var elemCorrect = document.getElementById("count_correct");
+
+  var now = Date.now();
+
+  var duration_ms = now - startTime;
+  var duration_s = duration_ms / 1000;
+  var minutes_part = Math.floor(duration_s / 60);
+  var seconds_part = Math.round(duration_s % 60);
+
+  var minutesOut = document.getElementById("minutes");
+  var secondsOut = document.getElementById("seconds");
+
+  minutesOut.innerHTML = minutes_part.toString().padStart(3, "0");
+  secondsOut.innerHTML = seconds_part.toString().padStart(2, "0");
+}
+
 function initialize() {
   initializeJumpList();
   registerEventHandlers();
   checkAnswers();
 }
 
+var startTime = Date.now();
+
 window.onload = initialize;
+var intervalID = window.setInterval(updateTime, 1000);
