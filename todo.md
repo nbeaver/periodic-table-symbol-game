@@ -13,3 +13,5 @@
 - [x] Add a timer that stops when all cells are filled in correctly and no incorrect cells
 
 - [x] Move cursor with up/down keys.
+
+- [ ] Add a "show solutions" button (useful for practicing).
